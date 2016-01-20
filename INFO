@@ -1,0 +1,17 @@
+Project: OpenContrail Virtual Networking for OPNFV
+Project Creation Date: August 4, 2015
+Project Category: Collaborative Development
+Lifecycle State: Incubation
+Primary Contact: Stuart Mackie
+Project Lead: Stuart Mackie
+Jira Project Name: OpenContrail Virtual Networking for OPNFV
+Jira Project Prefix: OVNO
+Mailing list tag: [OVNO]
+IRC: Server:freenode.net Channel:#opnfv-ovno
+Repository: ovno
+
+Committers:
+wsmackie@juniper.net
+iben@vmsec.com
+Link to TSC approval of the project: https://wiki.opnfv.org/wiki/tsc#august_4_2015
+
