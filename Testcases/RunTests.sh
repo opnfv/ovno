@@ -1,7 +1,7 @@
 #!/bin/bash
 
-PATH=${OVNO_COMMIT}/Testcases:$PATH
-cd ${OVNO_COMMIT}/Testcases
+PATH=/home/opnfv/ovno/Testcases:$PATH
+cd /home/opnfv/ovno/Testcases
 
 # Create the config wrapper
 OCL_IP=`echo $OS_AUTH_URL | cut -d "/" -f3 | cut -d ":" -f1`
