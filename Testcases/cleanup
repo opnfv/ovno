@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+if [ $1 == "v4" ]
+then
+  echo "Cleaning v4"
+else
+  echo "Cleaning v6"
+fi
+
