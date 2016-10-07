@@ -1,0 +1,7 @@
+bin
+.coverage
+.testrepository
+.tox
+tags
+*.sw[nop]
+*.pyc

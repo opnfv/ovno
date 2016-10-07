@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Script to produce some dummy output to satisfy contrail-nodemgr ntp status
+# Note: This is intended to be deployed inside containers where the host is running ntp
+
+if [ -x /usr/bin/ntpq ]; then
+	exec /usr/bin/ntpq "$@"
+fi
+
+echo "*"

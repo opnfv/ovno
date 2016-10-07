@@ -1,0 +1,7 @@
+zookeeper-automated-bundle:
+  relations: []
+  series: trusty
+  services:
+    zookeeper:
+      charm: zookeeper
+      num_units: 1

@@ -1,0 +1,9 @@
+revision
+*.pyc
+.stamp-*
+.venv2
+.venv3
+tests/.venv2
+tests/.venv3
+.coverage
+coverage

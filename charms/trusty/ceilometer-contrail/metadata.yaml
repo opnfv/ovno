@@ -1,0 +1,25 @@
+name: ceilometer-contrail
+summary: OpenStack Telemetry Contrail Plugin
+maintainer: Robert Ayres <robert.ayres@ubuntu.com>
+description: |
+  Ceilometer project aims to become the infrastructure to collect measurements
+  within OpenStack so that no two agents would need to be written to collect
+  the same data. It's primary targets are monitoring and metering, but the
+  framework should be easily expandable to collect for other needs. To that
+  effect, Ceilometer should be able to share collected data with a variety
+  of consumers.
+  .
+  This charm provides the Ceilometer Contrail plugin.
+categories:
+  - openstack
+subordinate: true
+provides:
+  ceilometer-plugin:
+    interface: ceilometer-plugin
+    scope: container
+requires:
+  container:
+    interface: juju-info
+    scope: container
+  contrail-analytics-api:
+    interface: contrail-analytics-api

@@ -1,0 +1,52 @@
+options:
+  install-sources:
+    type: string
+    default: |
+      - "ppa:opencontrail/ppa"
+      - "ppa:opencontrail/r2.20"
+    description: Package sources for install
+  install-keys:
+    type: string
+    description: Apt keys for package install sources
+  http-port:
+    type: int
+    default: 8080
+    description: Port to listen for HTTP requests on.
+  https-port:
+    type: int
+    default: 8143
+    description: Port to listen for HTTPS requests on.
+  use-https:
+    type: boolean
+    default: true
+    description: Use HTTPS. HTTP requests will be redirected to HTTPS.
+  ssl-cert:
+    type: string
+    description: |
+      PEM encoded X.509 certificate for use in SSL.
+      A self-signed certificate will be generated for use if ssl-cert and
+      ssl-key are not set.
+  ssl-key:
+    type: string
+    description: |
+      PEM encoded private key for use in SSL.
+      A self-signed certificate will be generated for use if ssl-cert and
+      ssl-key are not set.
+  logo-url:
+    type: string
+    default: ""
+    description: |
+      Optional URL to an image file with the site logo
+      to be used.
+      NOTE: it will get downloaded and cached every time
+      the config is updated. If empty, the default will
+      be used.
+  favicon-url:
+    type: string
+    default: ""
+    description: |
+      Optional URL to an icon file with the site favicon
+      to be used.
+      NOTE: it will get downloaded and cached every time
+      the config is updated. If empty, the default will
+      be used.

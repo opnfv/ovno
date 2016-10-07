@@ -1,0 +1,41 @@
+= Persistent storage =
+
+/!\ Unfortunately, per Bug #1334956, the storage and block-storage-broker
+    charms are not yet available in the charm store for trusty so
+    this documentation does not work as written.
+
+The cassandra charm takes advantage of the storage subordinate charm
+and the block-storage-broker charm. With these two charms cassandra can
+either request new volumes are created or use existing volumes.
+
+For requesting new volume creation, just set external_volume_mount in
+the cassandra charm and root, provider and volume_size for the storage
+subordinate charm.
+
+If using existing volumes, also set the volume_map for the storage
+subordinate charm.
+
+
+Example using existing volumes:
+
+juju deploy -n 3 cassandra
+juju set cassandra external_volume_mount="/srv/data"
+
+juju deploy storage
+juju set storage 
+        root=/srv/data
+        provider=block-storage-broker
+        volume_size=10
+        # Volume map needed for existing storage
+        volume_map="{cassandra/0: e09be717-384b-43e3-b06a-3a68b5a2252d,
+                     cassandra/1: ebd35228-6972-4e22-86a8-37483581154a,
+                     cassandra/2: 9f02b67b-72da-4e22-98ee-10a95c1b298d}"
+
+juju deploy block-storage-broker
+
+juju add-relation storage cassandra
+juju add-relation storage block-storage-broker
+
+
+See the READMEs for the storage subordinate charm and the
+block-storage-broker charm for more detail on persistent storage.

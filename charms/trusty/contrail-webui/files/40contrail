@@ -1,0 +1,4 @@
+Explanation: Use contrail version of nodejs
+Package: nodejs
+Pin: version /contrail/
+Pin-Priority: 1001
