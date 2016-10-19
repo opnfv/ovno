@@ -314,10 +314,6 @@ def add_source(source, key=None):
                 key_file.flush()
                 key_file.seek(0)
                 subprocess.check_call(['apt-key', 'add', '-'], stdin=key_file)
-        elif 'http://' in key:
-            with NamedTemporaryFile('w+') as key_file:
-                subprocess.check_call(['wget', key, '-O-'], stdout=key_file)
-                subprocess.check_call(['apt-key', 'add', key_file.name])
         else:
             # Note that hkp: is in no way a secure protocol. Using a
             # GPG key id is pointless from a security POV unless you
