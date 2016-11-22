@@ -1,0 +1,316 @@
+# Copyright 2015 Canonical Ltd.
+#
+# This file is part of the Cassandra Charm for Juju.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 3, as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranties of
+# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+options:
+    # Install and upgrade charm related options
+    extra_packages:
+        type: string
+        default: ""
+        description: >
+                Extra packages to install. A space delimited list of packages.
+    package_status:
+        default: "install"
+        type: string
+        description: >
+            The status of service-affecting packages will be set to this
+            value in the dpkg database. Useful valid values are "install"
+            and "hold".
+    install_sources:
+        type: string
+        description: >
+            charm-helpers standard listing of package install sources.
+            If you are using Datastax Enterprise, you will need to
+            override one defaults with your own username and password.
+        default: |
+            - deb http://www.apache.org/dist/cassandra/debian 22x main
+            - ppa:openjdk-r/ppa   # For OpenJDK 8
+            - ppa:stub/cassandra  # For Python driver
+        #   - deb http://debian.datastax.com/community stable main
+        #   DSE requires you to register and add your username/password here.
+        #   - deb http://un:pw@debian.datastax.com/enterprise stable main
+    install_keys:
+        type: string
+        description: >
+            charm-helpers standard listing of package install source
+            signing keys, corresponding to install_sources.
+        default: |
+            - null  # ppa:stub/cassandra signing key added automatically.
+            - null  # Apache package signing key added automatically.
+            - null  # PPA package signing key added automatically.
+            # - null  # DataStack package signing key added automatically.
+    http_proxy:
+        type: string
+        description: >
+            Value for the http_proxy and https_proxy environment variables.
+            This causes pip(1) and other tools to perform downloads via
+            the proxy server. eg. http://squid.dc1.lan:8080
+        default: ""
+    # TODO: Add JNA
+    # private_jna_url:
+    #     type: string
+    #     default: ""
+    #     description: >
+    #         URL for the private jna tar file. DSE requires JNA >= 3.4
+    private_jre_url:
+        type: string
+        default: ""
+        description: >
+            URL for the private jre tar file. DSE requires
+            Oracle Java SE 8 Server JRE (eg. server-jre-8u60-linux-x64.tar.gz).
+    edition:
+        type: string
+        default: community
+        description: >
+            One of 'community' or 'dse'. 'community' uses the
+            Apache Cassandra packages. 'dse' is for DataStax
+            Enterprise. Selecting 'dse' overrides the jvm setting.
+    jre:
+        type: string
+        default: openjdk
+        description: >
+            Which Java runtime environment to use. May be 'openjdk' or
+            'oracle'.
+            
+    # Storage configuration
+    wait_for_storage_broker:
+        type: boolean
+        default: False
+        description: >
+            Do not start the service before external storage has been
+            mounted using the block storage broker relation. If you do
+            not set this and you relate the service to the storage
+            broker, then your service will have started up using local
+            disk, and later torn down and rebuilt when the external
+            storage became available.
+    data_file_directories:
+         type: string
+         default: data
+         description: >
+            Space delimited data directories. Use multiple data
+            directories to split data over multiple physical hardware
+            drive partitions. Paths are relative to /var/lib/cassandra
+            or the block storage broker external mount point.
+    commitlog_directory:
+         type: string
+         default: commitlog
+         description: >
+             Commit log directory. The path is relative to
+             /var/lib/cassandra or the block storage broker external
+             mount point.
+    saved_caches_directory:
+         type: string
+         default: saved_caches
+         description: >
+             Saved caches directory. The path is relative to
+             /var/lib/cassandra or the block storage broker external
+             mount point.
+    io_scheduler:
+        type: string
+        default: "noop"
+        description: >
+            Set kernel io scheduler for persistent storage.
+            https://www.kernel.org/doc/Documentation/block/switching-sched.txt
+ 
+##     units-to-update:
+##         type: string
+##         default: "all"
+##         description: >
+##             Comma separated list of unit numbers to update (i.e. modify
+##             /etc setup and trigger cassandra restart on config-change or
+##             upgrade-charm), or "all".
+
+    # nrpe-external-master relation related options
+    nagios_context:
+      default: "juju"
+      type: string
+      description: |
+        Used by the nrpe subordinate charms.
+        A string that will be prepended to instance name to set the host name
+        in nagios. So for instance the hostname would be something like:
+            juju-myservice-0
+        If you're running multiple environments with the same services in them
+        this allows you to differentiate between them.
+    nagios_servicegroups:
+      default: ""
+      type: string
+      description: >
+        A comma-separated list of nagios servicegroups.
+        If left empty, the nagios_context will be used as the servicegroup
+    nagios_heapchk_warn_pct:
+        default: 80
+        type: int
+        description: >
+            The pct of heap used to trigger a nagios warning
+    nagios_heapchk_crit_pct:
+        default: 90
+        type: int
+        description: >
+            The pct of heap used to trigger a nagios critcal alert
+    nagios_disk_warn_pct:
+        default: 50 
+        type: int
+        description: >
+            The pct of data disk used to trigger a nagios warning
+    nagios_disk_crit_pct:
+        default: 25 
+        type: int
+        description: >
+            The pct of data disk used to trigger a nagios critcal alert
+
+    # cassandra-env.sh related options
+    # The default tuning has been chosen to be suitable for development
+    # and test environments. The default tunings are expected to change
+    # over time.
+    max_heap_size:
+        type: string
+        default: '384M'
+        description: >
+            Total size of Java memory heap, for example 1G or 512M.
+            If you set this, you should also set heap_newsize. The
+            default is automatically tuned.
+    heap_newsize:
+        type: string
+        default: '32M'
+        description: >
+            The size of the JVM's young generation in the heap. If you
+            set this, you should also set max_heap_size. If in doubt,
+            go with 100M per physical CPU core. The default is
+            automatically tuned.
+
+    # Cassandra.yaml related options
+    cluster_name:
+        type: string
+        default: "juju"
+        description: >
+            Name of the Cassandra cluster. This is mainly used to
+            prevent machines in one logical cluster from joining
+            another. All Cassandra services you wish to cluster together
+            must have the same cluster_name. This setting cannot be changed
+            after service deployment.
+    partitioner:
+        default: Murmur3Partitioner
+        type: string
+        description: >
+            The cassandra partitioner to use. Use Murmur3Partitioner,
+            unless another is required for backwards compatibility.
+    num_tokens:
+        type: int
+        default: 256
+        description: Number of tokens per node.
+            
+    # Topology of the service in the cluster.
+    datacenter:
+        type: string
+        default: "juju"
+        description: >
+            The node's datacenter used by the endpoint_snitch. e.g. "DC1".
+            It cannot be changed after service deployment.
+    rack: 
+        type: string
+        default: ""
+        description: >
+            The rack used by the endpoint_snitch for all units in this
+            service. e.g. "Rack1". This cannot be changed after deployment.
+            It defaults to the service name. Cassandra will store replicated
+            data in different racks whenever possible.
+
+            
+    # Networking options.
+    native_transport_port:
+        type: int
+        default: 9042
+        description: Native protocol port for native protocol clients.
+    rpc_port:
+        type: int
+        default: 9160
+        description: Thrift protocol port for legacy clients.
+    storage_port:
+        type: int
+        default: 7000
+        description: Cluster communication port
+    ssl_storage_port:
+        type: int
+        default: 7001
+        description: >
+            Cluster secure communication port. TODO: Unused. configure SSL.
+    authenticator:
+        type: string
+        default: PasswordAuthenticator
+        description: >
+            Authentication backend. Only PasswordAuthenticator and
+            AllowAllAuthenticator are supported. You should only
+            use AllowAllAuthenticator for legacy applications that
+            cannot provide authentication credentials.
+    authorizer:
+        type: string
+        default: AllowAllAuthorizer
+        description: >
+            Authorization backend, implementing IAuthorizer; used to limit
+            access/provide permissions Out of the box, Cassandra provides
+            AllowAllAuthorizer & CassandraAuthorizer
+            - AllowAllAuthorizer allows any action to any user - set it to
+              disable authorization.
+            - CassandraAuthorizer stores permissions in
+              system_auth.permissions table.
+
+   
+    # Tuning options.
+    compaction_throughput_mb_per_sec:
+        type: int
+        default: 16
+        description: >
+            Throttles compaction to the given total throughput (in MB/sec)
+            across the entire system. The faster you insert data, the faster
+            you need to compact in order to keep the sstable count down,
+            but in general, setting this to 16 to 32 times the rate you
+            are inserting data is more than sufficient.  Setting this to
+            0 disables throttling. Note that this account for all types
+            of compaction, including validation compaction.
+    stream_throughput_outbound_megabits_per_sec:
+        type: int
+        default: 200
+        description: >
+            Throttles all outbound streaming file transfers on nodes to the
+            given total throughput in Mbps. This is necessary because Cassandra
+            does mostly sequential IO when streaming data during bootstrap or 
+            repair, which can lead to saturating the network connection and 
+            degrading rpc performance. When unset, the default is 200 Mbps
+            or 25 MB/s. 0 to disable throttling.
+
+    tombstone_warn_threshold:
+        type: int
+        default: 1000
+        description: >
+            When executing a scan, within or across a partition, we
+            need to keep the tombstones seen in memory so we can return
+            them to the coordinator, which will use them to make sure
+            other replicas also know about the deleted rows. With
+            workloads that generate a lot of tombstones, this can cause
+            performance problems and even exaust the server heap. Adjust
+            the thresholds here if you understand the dangers and want
+            to scan more tombstones anyway.
+    tombstone_failure_threshold:
+        type: int
+        default: 100000
+        description: >
+            When executing a scan, within or across a partition, we need
+            to keep the tombstones seen in memory so we can return them
+            to the coordinator, which will use them to make sure other
+            replicas also know about the deleted rows. With workloads
+            that generate a lot of tombstones, this can cause
+            performance problems and even exaust the server heap. Adjust
+            the thresholds here if you understand the dangers and want
+            to scan more tombstones anyway.

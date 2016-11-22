@@ -1,0 +1,15 @@
+bootstrap: true
+reset: false
+tests: ""
+virtualenv: false
+# sources: []
+# packages: []
+makefile:
+    - lint
+    - unittest
+    - Test1UnitDeployment
+    - Test3UnitDeployment
+    - Test20Deployment
+    - Test21Deployment
+    - Test30Deployment
+    - TestAllowAllAuthenticatorDeployment
