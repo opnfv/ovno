@@ -35,7 +35,7 @@ def bootstrap():
         packages = ['python3-bcrypt', 'python3-cassandra']
         set_proxy()
         fetch.configure_sources(update=True)
-        fetch.apt_install(packages, options="--force-yes", fatal=True)
+        fetch.apt_install(packages,fatal=True)
         import bcrypt     # NOQA: flake8
         import cassandra  # NOQA: flake8
 

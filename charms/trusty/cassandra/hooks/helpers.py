@@ -103,7 +103,7 @@ def install_packages(packages):
         # The DSE packages are huge, so this might take some time.
         status_set('maintenance', 'Installing packages')
         with autostart_disabled(['cassandra']):
-            fetch.apt_install(packages, fatal=True)
+            fetch.apt_install(packages, options="--force-yes", fatal=True)
 
 
 # FOR CHARMHELPERS
