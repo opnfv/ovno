@@ -187,7 +187,7 @@ def apt_install(packages, options=None, fatal=False):
     if options is None:
         options = ['--option=Dpkg::Options::=--force-confold']
 
-    cmd = ['apt-get', '--assume-yes']
+    cmd = ['apt-get', '--assume-yes', '--force-yes']
     cmd.extend(options)
     cmd.append('install')
     if isinstance(packages, six.string_types):
