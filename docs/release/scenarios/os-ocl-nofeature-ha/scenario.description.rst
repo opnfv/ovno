@@ -14,7 +14,11 @@ This document provides scenario level details for Danube release of OpenContrail
 
 Introduction
 ---------------
-The scenario installs OpenStack Mitaka release configured with OpenContrail virtual networking to implement Neutron service and extended virtual networking capabilities. The scenario is termed "nofeature" because the OpenContrail package already includes many networking features such as service chaining, IPv6, L3VPN that don't need to be added with separate feature packages.
+The scenario installs OpenStack Mitaka release configured with OpenContrail 
+virtual networking to implement Neutron service and extended virtual networking
+ capabilities. The scenario is termed "nofeature" because the OpenContrail 
+package already includes many networking features such as service chaining, 
+IPv6, L3VPN that don't need to be added with separate feature packages.
 
 Scenario components and composition
 -------------------------------------
