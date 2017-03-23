@@ -1,1 +1,0 @@
-../lib/ceilometer_contexts.py

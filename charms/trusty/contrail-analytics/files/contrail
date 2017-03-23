@@ -1,5 +1,0 @@
-Explanation: Use contrail version of the package.
-Package: python-redis
-Pin: version /contrail/
-Pin-Priority: 1001
-

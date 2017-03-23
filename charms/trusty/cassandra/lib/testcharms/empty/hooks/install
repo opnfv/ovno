@@ -1,6 +1,0 @@
-#!/bin/sh -ex
-# apt-get install \
-#     python3-pip python3-dev python3-six python3-yaml \
-#     build-essential libev4 libev-dev
-# pip3 install blist
-# pip3 install cassandra-driver
