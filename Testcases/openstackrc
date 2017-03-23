@@ -1,6 +1,0 @@
-export OS_PASSWORD=contrail123
-export OS_AUTH_URL=http://10.10.11.16:5000/v2.0/
-export OS_USERNAME=admin
-export OS_TENANT_NAME=user9
-export OS_NO_CACHE=1
-

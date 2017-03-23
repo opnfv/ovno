@@ -1,1 +1,0 @@
-build_info = "{\"build-info\" : [{\"build-version\" : \"2.20\", \"build-time\" : \"2015-06-25 07:52:54.221985\", \"build-user\" : \"mganley\", \"build-hostname\" : \"contrail-ec-build16\", \"build-git-ver\" : \"c6744e5\", ";
