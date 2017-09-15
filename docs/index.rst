@@ -18,35 +18,4 @@ Release
 .. toctree::
    :maxdepth: 1
 
-   release/overview
-   release/installation.introduction
-   release/userguide.introduction
-   release/release-notes
-
-
-Test Frameworks
----------------
-
-.. toctree::
-   :maxdepth: 1
-
-   testing/ecosystem/index
-   testing/testing-user
-   testing/testing-dev
-
-
-Developer
----------
-
-.. toctree::
-   :maxdepth: 1
-
-   how-to-use-docs/index
-   featureprojects
-
-
-Infrastructure
---------------
-
-.. toctree::
-   :maxdepth: 1
+   release/userguide
