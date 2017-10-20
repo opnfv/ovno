@@ -62,22 +62,22 @@ Juju jumphost
 
 $ juju ssh contrail-controller/0 "sudo docker exec contrail-controller contrail-status"
 == Contrail Control ==
-contrail-control:             active            
-contrail-named:               active            
-contrail-dns:                 active            
-contrail-control-nodemgr:     active            
+contrail-control:             active
+contrail-named:               active
+contrail-dns:                 active
+contrail-control-nodemgr:     active
 == Contrail Config ==
-contrail-api:                 active            
-contrail-schema:              active            
-contrail-svc-monitor:         active            
-contrail-device-manager:      active            
-contrail-config-nodemgr:      active            
+contrail-api:                 active
+contrail-schema:              active
+contrail-svc-monitor:         active
+contrail-device-manager:      active
+contrail-config-nodemgr:      active
 == Contrail Web UI ==
-contrail-webui:               active            
-contrail-webui-middleware:    active            
+contrail-webui:               active
+contrail-webui-middleware:    active
 == Contrail Support Services ==
 rabbitmq-server:              active               (disabled on boot)
-zookeeper:                    active            
+zookeeper:                    active
 Connection to 172.16.50.153 closed.
 
 Note that due to the distributed containerized deployment that is used in Juju, the contrail-status
@@ -86,13 +86,13 @@ contrail-analytics node yields:
 
 $ juju ssh contrail-analytics/0 "sudo docker exec contrail-analytics contrail-status"
 == Contrail Analytics ==
-contrail-collector:           active            
-contrail-analytics-api:       active            
-contrail-query-engine:        active            
-contrail-alarm-gen:           active            
-contrail-snmp-collector:      active            
-contrail-topology:            active            
-contrail-analytics-nodemgr:   active            
+contrail-collector:           active
+contrail-analytics-api:       active
+contrail-query-engine:        active
+contrail-alarm-gen:           active
+contrail-snmp-collector:      active
+contrail-topology:            active
+contrail-analytics-nodemgr:   active
 Connection to 172.16.50.153 closed.
 
 A set of command line python utilities are provided that implement most OpenContrail features. These
