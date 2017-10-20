@@ -7,6 +7,7 @@
 =================================
 OpenContrail in OPNFV
 =================================
+See https://wiki.opnfv.org/display/ovno/Post-Release+Notes+for+OpenContrail+in+OPNFV+Euphrates+5.0 for release notes.
 
 Introduction
 ============
