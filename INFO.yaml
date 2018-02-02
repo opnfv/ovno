@@ -1,0 +1,48 @@
+---
+project: 'OpenContrail Virtual Networking for OPNFV'
+project_creation_date: 'August 4, 2015'
+project_category: 'Collaborative project'
+lifecycle_state: 'Incubation'
+project_lead: &opnfv_ovno_ptl
+    name: 'Stuart Mackie'
+    email: 'wsmackie@juniper.net'
+    id: 'mackiestuart'
+    company: 'juniper.net'
+    timezone: 'Unknown'
+primary_contact: *opnfv_ovno_ptl
+issue_tracking:
+    type: 'jira'
+    url: 'https://jira.opnfv.org/projects/[ovno]'
+    key: '[ovno]'
+mailing_list:
+    type: 'mailman2'
+    url: 'opnfv-tech-discuss@lists.opnfv.org'
+    tag: '[ovno]'
+realtime_discussion:
+    type: irc
+    server: 'freenode.net'
+    channel: '#opnfv-ovno'
+meetings:
+    - type: 'gotomeeting+irc'
+      agenda:  # eg: 'https://wiki.opnfv.org/display/'
+      url:  # eg: 'https://global.gotomeeting.com/join/819733085'
+      server: 'freenode.net'
+      channel: '#opnfv-meeting'
+      repeats: 'weekly'
+      time:  # eg: '16:00 UTC'
+repositories:
+    - 'ovno'
+committers:
+    - <<: *opnfv_ovno_ptl
+    - name: 'Narinder Gupta'
+      email: 'narinder.gupta@canonical.com'
+      company: 'canonical.com'
+      id: 'narindergupta'
+    - name: 'Tim Rozet'
+      email: 'trozet@redhat.com'
+      company: 'redhat.com'
+      id: 'trozet'
+tsc:
+    # yamllint disable rule:line-length
+    approval: 'https//wiki.opnfv.org/wiki/tsc#august_4_2015'
+    # yamllint enable rule:line-length
